@@ -1,0 +1,21 @@
+FROM node:alpine
+
+RUN apk update && apk add --no-cache curl
+
+WORKDIR /usr/src/app
+RUN mkdir /usr/src/app/logger
+
+RUN mkdir /usr/src/app/logger/filelogger
+
+COPY package*.json ./
+
+RUN npm install --
+
+ENV TZ=Asia/Jakarta
+
+COPY . .
+
+EXPOSE 3014
+
+
+CMD [ "npm", "start" ]
